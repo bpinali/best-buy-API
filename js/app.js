@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function getResults(query) {
-        var url = 'https://api.bestbuy.com/v1/products(name=' + query + '*)';
+        var url = 'https://api.bestbuy.com/v1/products((search=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankLongTerm.asc';
         console.log(query);
         $.ajax({
             method: 'GET',
@@ -20,6 +20,7 @@ $(document).ready(function () {
                 if (result.products.length == 0) {
                     alert('No Results!');
                 } else {
+                    console.log(url);
                     console.log(result);
                     console.log(result.products[0].image);
                     console.log(result.products[0].name);
