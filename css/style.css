@@ -111,11 +111,30 @@ h3 {
 .results img {
     display: block;
     max-width: 90%;
-    max-height: 6rem;
+    height: 6rem;
     overflow: hidden;
     vertical-align: middle;
     margin: 1.25rem auto 1rem auto;
 }
+
+.results .title-wrapper {
+    height: 5rem;
+    display: table;
+    width: 100%;
+    /* forms as a table cell */
+}
+
+.results h3 {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.product-details {
+    min-height: 6.5rem;
+}
+
+.product-details p {}
 
 .add-to-cart {
     display: block;
@@ -148,6 +167,10 @@ h3 {
 
 .strong {
     font-weight: bold;
+}
+
+.no-sale {
+    margin-top: 1.56rem;
 }
 
 

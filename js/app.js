@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function getResults(query) {
-        var url = 'https://api.bestbuy.com/v1/products((search=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankLongTerm.asc';
+        var url = 'https://api.bestbuy.com/v1/products((name=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankShortTerm.asc';
         console.log(query);
         $.ajax({
             method: 'GET',
@@ -18,7 +18,7 @@ $(document).ready(function () {
         }).done(
             function (result) {
                 if (result.products.length == 0) {
-                    alert('No Results!');
+                    alert('No Results Found!');
                 } else {
                     console.log(url);
                     console.log(result);
@@ -37,8 +37,9 @@ $(document).ready(function () {
                 if (!result.error && result.products) {
                     result.products.forEach(function (product) {
                         output += '<li>';
-                        output += '<h3>' + product.name + '</h3>';
+                        output += '<div class="title-wrapper"><h3>' + product.name + '</h3></div>';
                         output += '<img src="' + product.image + '">';
+                        output += '<div class = "product-details">';
                         if (product.customerReviewCount != null) {
                             output += '<p class="review-num">' + product.customerReviewCount + ' Reviews</p>';
                         }
@@ -50,15 +51,16 @@ $(document).ready(function () {
                             output += '<p class="reg-price strikethrough">$' + product.regularPrice + '</p>';
                             output += '<p class="sale-price highlight">Sale: $' + product.salePrice + '</p>';
                         } else {
-                            output += '<p class="reg-price strong">$' + product.regularPrice + '</p>';
+                            output += '<p class="reg-price strong no-sale">$' + product.regularPrice + '</p>';
                         }
+                        output += '</div>';
                         output += '<a href="' + product.addToCartUrl + '" class="add-to-cart">Add to Cart</a>';
                         output += '</li>';
                     });
                 } else {
                     output = "Unable to access products (see browser console for more information)";
                 }
-                $('.results ul').append(output);
+                $('.results ul').html(output);
             }
         ).fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
@@ -68,5 +70,6 @@ $(document).ready(function () {
     }
     $('#search-button').on('click', function () {
         getResults($("#search-box").val());
+        $("#search-box").val('');
     });
 });
