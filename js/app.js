@@ -50,11 +50,17 @@ $(document).ready(function () {
                         if ((product.salePrice < product.regularPrice) && (product.salePrice != null)) {
                             output += '<p class="reg-price strikethrough">$' + product.regularPrice + '</p>';
                             output += '<p class="sale-price highlight">Sale: $' + product.salePrice + '</p>';
+                            var isSale = true;
                         } else {
                             output += '<p class="reg-price strong no-sale">$' + product.regularPrice + '</p>';
+                            var isSale = false;
                         }
                         output += '</div>';
-                        output += '<a href="' + product.addToCartUrl + '" class="add-to-cart">Add to Cart</a>';
+                        if (isSale == false) {
+                            output += '<a href="' + product.addToCartUrl + '" class="add-to-cart">Add to Cart</a>';
+                        } else {
+                            output += '<a href="' + product.addToCartUrl + '" class="add-to-cart sale-button">Add to Cart</a>';
+                        }
                         output += '</li>';
                     });
                 } else {
