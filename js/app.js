@@ -67,6 +67,7 @@ $(document).ready(function () {
                     output = "Unable to access products (see browser console for more information)";
                 }
                 $('.results ul').html(output);
+                $(".loader").fadeOut("slow");
             }
         ).fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
@@ -75,7 +76,9 @@ $(document).ready(function () {
         });
     }
     $('#search-button').on('click', function () {
+        $(".loader").fadeIn("slow");
         getResults($("#search-box").val());
         $("#search-box").val('');
+
     });
 });
