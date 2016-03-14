@@ -37,7 +37,8 @@ $(document).ready(function () {
                 if (!result.error && result.products) {
                     result.products.forEach(function (product) {
                         output += '<li>';
-                        output += '<div class="title-wrapper"><h3>' + product.name + '</h3></div>';
+                        output += '<div class="product-container">';
+                        output += '<div class="title-wrapper"><h3 class="clamp-this">' + product.name + '</h3></div>';
                         output += '<img src="' + product.image + '">';
                         output += '<div class = "product-details">';
                         if (product.customerReviewCount != null) {
@@ -61,12 +62,19 @@ $(document).ready(function () {
                         } else {
                             output += '<a href="' + product.addToCartUrl + '" class="add-to-cart sale-button">Add to Cart</a>';
                         }
+                        output += '</div>';
                         output += '</li>';
                     });
                 } else {
                     output = "Unable to access products (see browser console for more information)";
                 }
                 $('.results ul').html(output);
+                $('.clamp-this').each(function (index, element) {
+                    console.log(element);
+                    $clamp(element, {
+                        clamp: 3
+                    });
+                });
                 $(".loader").fadeOut("slow");
             }
         ).fail(function (jqXHR, error, errorThrown) {
@@ -81,4 +89,13 @@ $(document).ready(function () {
         $("#search-box").val('');
 
     });
+    $(document).on('keypress', function (key) {
+        //keyCode == 13 is the ENTER key
+        if (key.keyCode == 13) {
+            $(".loader").fadeIn("slow");
+            getResults($("#search-box").val());
+            $("#search-box").val('');
+        }
+    });
+
 });
