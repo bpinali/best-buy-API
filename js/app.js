@@ -13,7 +13,7 @@ function getUserQuery() {
 }
 
 function getResults(query) {
-  var url = 'https://api.bestbuy.com/v1/products((name=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankShortTerm.asc';
+  var url = 'https://crossorigin.me/https://api.bestbuy.com/v1/products((name=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankShortTerm.asc';
   $.ajax({
     method: 'GET',
     url: url,
@@ -31,35 +31,10 @@ function getResults(query) {
 }
 
 function resultsIntoListItem(output, product) {
-  var isSale;
-  output += '<li>';
-  output += '<div class="product-container">';
-  output += '<div class="title-wrapper"><h3 class="clamp-this">' + product.name + '</h3></div>';
-  output += '<img src="' + product.image + '">';
-  output += '<div class = "product-details">';
-  if (product.customerReviewCount != null) {
-    output += '<p class="review-num">' + product.customerReviewCount + ' Reviews</p>';
-  }
-  if (product.customerReviewAverage != null) {
-    output += '<p class="star-avg">' + product.customerReviewAverage + ' Stars</p>';
-  }
-
-  if ((product.salePrice < product.regularPrice) && (product.salePrice != null)) {
-    output += '<p class="reg-price strikethrough">$' + product.regularPrice + '</p>';
-    output += '<p class="sale-price highlight">Sale: $' + product.salePrice + '</p>';
-    isSale = true;
-  } else {
-    output += '<p class="reg-price strong no-sale">$' + product.regularPrice + '</p>';
-    isSale = false;
-  }
-  output += '</div>';
-  if (isSale == false) {
-    output += '<a href="' + product.addToCartUrl + '" class="add-to-cart">Add to Cart</a>';
-  } else {
-    output += '<a href="' + product.addToCartUrl + '" class="add-to-cart sale-button">Add to Cart</a>';
-  }
-  output += '</div>';
-  output += '</li>';
+  var source   = $("#product-list-item").html();
+  var template = Handlebars.compile(source);
+  product.isSale = (product.salePrice < product.regularPrice) && (product.salePrice);
+  output += template(product);
   return output;
 }
 
