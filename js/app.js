@@ -56,7 +56,6 @@ function ajaxDone(result) {
     alert('No Results Found!');
   } else {
     if (!result.error && result.products) {
-      console.log(result.products);
       output = result.products.reduce(resultsIntoListItem, '');
     } else {
       output = 'Unable to access products (see browser console for more information)';

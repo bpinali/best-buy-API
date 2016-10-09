@@ -9,7 +9,7 @@ bestBuy.Model = function() {
 }
 
 bestBuy.Model.prototype.getResults = function(query) {
-  var url = 'https://api.bestbuy.com/v1/products((name=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankShortTerm.asc';
+  var url = 'https://crossorigin.me/https://api.bestbuy.com/v1/products((name=' + query + '*)&type!=BlackTie&customerTopRated=true)?sort=salesRankShortTerm.asc';
   $.ajax({
     method: 'GET',
     url: url,

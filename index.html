@@ -31,7 +31,7 @@
       <div class="product-container">
         <div class="title-wrapper">
           <h3 class="clamp-this">{{name}}</h3></div>
-        <img src="{{image}}">
+        <img src="https://crossorigin.me/{{image}}">
         <div class="product-details">
           {{#if customerReviewCount}}
           <p class="review-num">{{customerReviewCount}} Reviews</p>
@@ -45,8 +45,8 @@
           {{/if}}
         </div>
         {{#if isSale}}
-        <a href="{{addToCartUrl}}" class="add-to-cart sale-button">Add to Cart</a> {{else}}
-        <a href="{{addToCartUrl}}" class="add-to-cart">Add to Cart</a> {{/if}}
+        <a href="https://crossorigin.me/{{addToCartUrl}}" class="add-to-cart sale-button">Add to Cart</a> {{else}}
+        <a href="https://crossorigin.me/{{addToCartUrl}}" class="add-to-cart">Add to Cart</a> {{/if}}
       </div>
     </li>
   </script>
